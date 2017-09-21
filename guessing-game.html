@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<link href="css/terminal.css"rel="stylesheet"type="text/css">
+<script src="js/terminal.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        
+        var newline="<br/>";
+        
+        //createterminal
+        var terminal = new Terminal();
+        terminal.log('ConsolestyleGuessingGamev0.1');
+        terminal.log(newline);
+        terminal.log('Sourcecode:<ahref="https://c9.io/ugotsta/javascript">https://c9.io/ugotsta/javascript</a>');
+        terminal.log(newline);
+        var number;
+        newGame();
+        
+        function rnd(low,high){
+            return Math.floor((Math.random()*high)+low);
+        }
+        
+        function newGame(){
+            number=rnd(1,100);
+            terminal.log(newline);
+            terminal.log(newline);
+            terminal.log('Newgamestarted...');
+            terminal.log(newline);
+            guessNumber(number,"Guessanumberbetween1and100:");
+        }
+        
+        function guessNumber(number,clue){
+            terminal.prompt(clue,guessCallback);
+        }
+        
+        function guessCallback(guess){
+            guess=parseInt(+guess);
+            if(guess===number){
+                terminal.log("Yougotit!Thenumberwas"+number);
+                newGame();
+            } else if(guess<number){
+                guessNumber(number,"Toolow!Guessagain:");
+            } else if(guess>number){
+                guessNumber(number,"Toohigh!Guessagain:");
+            }
+        }
+    });
+</script>
+</head>
+
+<body>
+<div id="terminal"class="reverse"></div>
+</body>
+
+</html>
